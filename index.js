@@ -32,3 +32,15 @@ function userPrompt() {
         },
     ]);
 }
+
+async function run() {
+    try {
+        const userInput = await userPrompt();
+        const svgContent = generateSVG(userInput);
+        console.log('Logo generated!');
+    } catch (error) {
+        console.error('Error during logo generation:', error);
+    }
+}
+
+run();
