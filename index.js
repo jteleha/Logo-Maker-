@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { generateSVG } = require('./svgGenerator');
+const { generateSVG } = require('./lib/svgGenerator');
 
 function userPrompt() {
     return inquirer.prompt([
@@ -18,6 +18,9 @@ function userPrompt() {
             type: 'input',
             name: 'textColor',
             message: 'Enter a text color keyword (or a hexadecimal number):',
+            validate: (input) => {
+                return /^#[0-9A-F]{6}$/i.test(input) || ['black', 'white', 'red', 'green', 'blue'].includes(input.toLowerCase());
+            },
         },
         {
             type: 'list',
@@ -29,6 +32,9 @@ function userPrompt() {
             type: 'input',
             name: 'shapeColor',
             message: 'Enter a shape color keyword (or a hexadecimal number):',
+            validate: (input) => {
+                return /^#[0-9A-F]{6}$/i.test(input) || ['black', 'white', 'red', 'green', 'blue'].includes(input.toLowerCase());
+            },
         },
     ]);
 }
