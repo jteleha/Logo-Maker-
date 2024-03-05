@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-const { generateSVG } = require('./lib/svgGenerator');
+const fs = require('fs');
+const generateSVG = require('./lib/svgGenerator');
 
 function userPrompt() {
     return inquirer.prompt([
@@ -43,6 +44,7 @@ async function run() {
     try {
         const userInput = await userPrompt();
         const svgContent = generateSVG(userInput);
+        fs.writeFileSync('logo.svg', svgContent);
         console.log('Logo generated!');
     } catch (error) {
         console.error('Error during logo generation:', error);
